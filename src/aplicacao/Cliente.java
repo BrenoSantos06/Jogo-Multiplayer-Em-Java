@@ -14,6 +14,8 @@ public class Cliente {
 
         Scanner sc = new Scanner(System.in);
 
+        System.out.println("Bem Vindo ao Jogo da Adivinhação!");
+        System.out.println("Neste jogo, você deve acertar o numero secreto de 1 a 100!");
         System.out.print("Você é jogador 1 ou 2? ");
         int jogador = sc.nextInt();
 
