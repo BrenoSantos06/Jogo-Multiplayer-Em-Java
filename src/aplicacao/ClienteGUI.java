@@ -38,6 +38,7 @@ public class ClienteGUI extends JFrame {
 
         setSize(600, 500);
 
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setLocationRelativeTo(null);
@@ -188,7 +189,8 @@ public class ClienteGUI extends JFrame {
 
             Registry registry =
                     LocateRegistry.getRegistry(
-                            "26.240.192.36"
+                            //use localhost para rodar apenas em 1 pc, ou o ip da rede para mais de um pc
+                            "localhost"
                     );
 
             jogo =
@@ -206,25 +208,49 @@ public class ClienteGUI extends JFrame {
 
         try {
 
-            jogador =
-                    Integer.parseInt(
-                            campoJogador.getText()
-                    );
+            String texto =
+                    campoJogador
+                            .getText()
+                            .trim();
+
+            if (texto.isEmpty()) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Digite 1 ou 2."
+                );
+
+                return;
+            }
+
+            int valor =
+                    Integer.parseInt(texto);
+
+            if (valor != 1 && valor != 2) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "O jogador deve ser 1 ou 2."
+                );
+
+                return;
+            }
+
+            jogador = valor;
 
             campoJogador.setEnabled(false);
 
             botaoEntrar.setEnabled(false);
 
             labelStatus.setText(
-                    "Jogador "
-                            + jogador
+                    "Jogador " + jogador
             );
 
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(
                     this,
-                    "Jogador inválido"
+                    "Digite apenas números."
             );
         }
     }
@@ -284,6 +310,14 @@ public class ClienteGUI extends JFrame {
                 JOptionPane.showMessageDialog(
                         this,
                         "VOCÊ VENCEU!"
+                );
+            }
+
+            if (resposta.equals("JOGADOR_INVALIDO")) {
+
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Jogador inválido."
                 );
             }
 

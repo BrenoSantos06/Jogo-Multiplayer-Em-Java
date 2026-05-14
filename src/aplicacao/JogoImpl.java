@@ -32,6 +32,13 @@ public class JogoImpl
             int jogador
     ) throws RemoteException {
 
+        // VALIDAÇÃO DO JOGADOR
+        if (jogador != 1
+                && jogador != 2) {
+
+            return "JOGADOR_INVALIDO";
+        }
+
         if (encerrado) {
             return "JOGO_ENCERRADO";
         }
